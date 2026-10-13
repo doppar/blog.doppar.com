@@ -87,10 +87,59 @@ class Post extends Model
     }
 
     #[Hook('before_created')]
-    protected function createSlugFromTitle(): void
+    protected function prepareForCreate(): void
     {
         $this->user_id = auth()->id();
-        $this->slug = str()->slug($this->title);
+        $this->slug = $this->uniqueSlug($this->slugSource());
+        $this->stampPublishedAt();
+    }
+
+    #[Hook('before_updated')]
+    protected function prepareForUpdate(): void
+    {
+        $this->slug = $this->uniqueSlug($this->slugSource(), (int) $this->id);
+        $this->stampPublishedAt();
+    }
+
+    /**
+     * Use the slug the editor typed; fall back to the title when it is empty.
+     */
+    protected function slugSource(): string
+    {
+        $slug = trim((string) $this->slug);
+
+        return $slug !== '' ? $slug : (string) $this->title;
+    }
+
+    /**
+     * Normalize a slug and make it unique by appending -2, -3, ... when taken.
+     */
+    protected function uniqueSlug(string $source, ?int $ignoreId = null): string
+    {
+        $base = str()->slug($source) ?: 'post';
+        $slug = $base;
+        $suffix = 2;
+
+        while (
+            static::query()
+                ->where('slug', $slug)
+                ->if($ignoreId, fn($query) => $query->where('id', '!=', $ignoreId))
+                ->exists()
+        ) {
+            $slug = $base . '-' . $suffix++;
+        }
+
+        return $slug;
+    }
+
+    /**
+     * A published post always carries the date it went live.
+     */
+    protected function stampPublishedAt(): void
+    {
+        if ($this->status === 'published' && trim((string) $this->published_at) === '') {
+            $this->published_at = now()->format('Y-m-d H:i:s');
+        }
     }
 
     #[Hook('after_created')]

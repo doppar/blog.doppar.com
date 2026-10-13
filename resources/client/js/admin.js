@@ -1552,6 +1552,8 @@ function bootRichEditors() {
         const imageRemove = root.querySelector('[data-editor-image-remove]');
         const imageAlignButtons = Array.from(root.querySelectorAll('[data-editor-image-align-value]'));
         const slashMenu = root.querySelector('[data-editor-slash-menu]');
+        const statsEl = root.querySelector('[data-editor-stats]');
+        const errorEl = root.querySelector('[data-editor-error]');
 
         if (!(canvas instanceof HTMLElement) || !(source instanceof HTMLTextAreaElement) || !(toolbar instanceof HTMLElement)) {
             return;
@@ -1956,7 +1958,55 @@ function bootRichEditors() {
             });
         }
 
+        // Same reading-time formula the published post uses (200 wpm, minimum 1).
+        function updateStats() {
+            if (!(statsEl instanceof HTMLElement)) {
+                return;
+            }
+
+            const words = editor.getText().trim().split(/\s+/).filter(Boolean).length;
+            let images = 0;
+
+            editor.state.doc.descendants((node) => {
+                if (node.type.name === 'editorImage') {
+                    images += 1;
+                }
+            });
+
+            const minutes = Math.max(1, Math.ceil(words / 200));
+            const parts = [
+                `<span><strong>${words.toLocaleString()}</strong> ${words === 1 ? 'word' : 'words'}</span>`,
+                `<span><strong>${minutes}</strong> min read</span>`,
+            ];
+
+            if (images > 0) {
+                parts.push(`<span><strong>${images}</strong> ${images === 1 ? 'image' : 'images'}</span>`);
+            }
+
+            statsEl.innerHTML = parts.join('<span aria-hidden="true">·</span>');
+        }
+
+        // A body made only of empty paragraphs is not content.
+        function hasContent() {
+            if (editor.getText().trim() !== '') {
+                return true;
+            }
+
+            let found = false;
+
+            editor.state.doc.descendants((node) => {
+                if (['editorImage', 'horizontalRule', 'codeBlock'].includes(node.type.name)) {
+                    found = true;
+                }
+
+                return !found;
+            });
+
+            return found;
+        }
+
         function refreshEditorUi() {
+            updateStats();
             updateToolbar();
             syncCodeLanguage();
             syncImagePopover();
@@ -2232,9 +2282,26 @@ function bootRichEditors() {
             }
         });
 
-        root.closest('form')?.addEventListener('submit', () => {
+        root.closest('form')?.addEventListener('submit', (event) => {
+            if (!hasContent()) {
+                event.preventDefault();
+
+                if (errorEl instanceof HTMLElement) {
+                    errorEl.textContent = 'The body is empty. Write something before saving.';
+                    errorEl.classList.remove('is-hidden');
+                }
+
+                editor.chain().focus('start').run();
+                root.scrollIntoView({ block: 'center', behavior: 'smooth' });
+
+                return;
+            }
+
+            errorEl?.classList.add('is-hidden');
             source.value = editor.getHTML();
         });
+
+        editor.on('update', () => errorEl?.classList.add('is-hidden'));
     });
 }
 

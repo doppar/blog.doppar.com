@@ -1,10 +1,10 @@
 #extends('layouts.public')
 
-#section('title')[[ $post->seo_title ?? $post->title ]]#endsection
+#section('title')[[ $post->seo_title ?: $post->title ]]#endsection
 
-#section('og_title')[[ $post->seo_title ?? $post->title ]]#endsection
+#section('og_title')[[ $post->seo_title ?: $post->title ]]#endsection
 
-#section('meta_description')[[ $post->seo_description ?? $post->excerpt ?? 'Read the latest on the Doppar PHP framework.' ]]#endsection
+#section('meta_description')[[ $post->seo_description ?: ($post->excerpt ?: 'Read the latest on the Doppar PHP framework.') ]]#endsection
 
 #section('og_type')[[ 'article' ]]#endsection
 

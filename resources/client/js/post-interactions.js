@@ -113,6 +113,40 @@ function insertReplyIntoDom(parentId, commentHtml) {
     repliesContainer.insertAdjacentHTML('beforeend', commentHtml);
 }
 
+// Like from a feed card. Delegated so cards added by "Show more" work too.
+document.addEventListener('click', async (event) => {
+    const button = event.target instanceof Element ? event.target.closest('.feed-like-btn') : null;
+
+    if (!button || button.disabled) {
+        return;
+    }
+
+    event.preventDefault();
+    button.disabled = true;
+
+    try {
+        const response = await jsonFetch(`/posts/${button.dataset.slug}/like`, { method: 'POST' });
+        const data = await parseJsonResponse(response);
+        const card = button.closest('article');
+        const stat = card?.querySelector('[data-like-stat]');
+
+        button.dataset.liked = data.liked ? '1' : '0';
+        button.setAttribute('aria-pressed', data.liked ? 'true' : 'false');
+        button.classList.toggle('is-liked', data.liked);
+        button.querySelector('.feed-like-icon')?.setAttribute('fill', data.liked ? 'currentColor' : 'none');
+        button.querySelector('.feed-like-label').textContent = data.liked ? 'Liked' : 'Like';
+
+        if (stat) {
+            stat.querySelector('[data-like-count]').textContent = Number(data.like_count).toLocaleString();
+            stat.classList.toggle('invisible', Number(data.like_count) === 0);
+        }
+    } catch (error) {
+        console.error('Like error:', error);
+    } finally {
+        button.disabled = false;
+    }
+});
+
 document.addEventListener("DOMContentLoaded", function () {
     // Like functionality
     const likeBtn = document.getElementById('like-btn');

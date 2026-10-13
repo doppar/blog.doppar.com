@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers\Concerns;
 
+use App\Models\Comment;
+use App\Models\Like;
+
 /**
  * Shared cursor-pagination + accent-decoration logic for controllers
  * that render a grid of posts via the `partials.post-list-items` view
@@ -43,6 +46,49 @@ trait BuildsPostFeed
             $post->accent_solid = $solid;
             $post->accent_soft  = $soft;
             $post->author_initial = strtoupper(substr((string) ($post->author_name ?? 'A'), 0, 1));
+        }
+
+        return $posts;
+    }
+
+    /**
+     * Attach like/comment totals and whether the signed-in viewer has liked
+     * each post, using one grouped query per metric for the whole page.
+     *
+     *  - likes_count    : total likes
+     *  - comments_count : approved comments
+     *  - viewer_liked   : true when the current user liked the post
+     */
+    protected function decoratePostsWithEngagement(array $posts): array
+    {
+        $ids = array_values(array_unique(array_map(fn($post) => (int) $post->id, $posts)));
+
+        if ($ids === []) {
+            return $posts;
+        }
+
+        $likeCounts = [];
+        foreach (Like::query()->select('post_id')->selectRaw('COUNT(*) AS total')->whereIn('post_id', $ids)->groupBy('post_id')->get() as $row) {
+            $likeCounts[(int) $row->post_id] = (int) $row->total;
+        }
+
+        $commentCounts = [];
+        foreach (Comment::query()->select('post_id')->selectRaw('COUNT(*) AS total')->whereIn('post_id', $ids)->where('status', true)->groupBy('post_id')->get() as $row) {
+            $commentCounts[(int) $row->post_id] = (int) $row->total;
+        }
+
+        $likedByViewer = [];
+        if (auth()->check()) {
+            foreach (Like::query()->where('user_id', auth()->id())->whereIn('post_id', $ids)->get() as $row) {
+                $likedByViewer[(int) $row->post_id] = true;
+            }
+        }
+
+        foreach ($posts as $post) {
+            $id = (int) $post->id;
+            $post->likes_count = $likeCounts[$id] ?? 0;
+            $post->comments_count = $commentCounts[$id] ?? 0;
+            $post->viewer_liked = isset($likedByViewer[$id]);
         }
 
         return $posts;

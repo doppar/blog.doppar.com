@@ -245,6 +245,10 @@
 
                                 <div class="admin-rich-editor__canvas" data-rich-editor-canvas></div>
 
+                                <p class="admin-rich-editor__error is-hidden" data-editor-error role="alert"></p>
+
+                                <div class="admin-rich-editor__footer" data-editor-stats aria-live="polite"></div>
+
                                 <div class="admin-rich-editor__slash-menu is-hidden" data-editor-slash-menu></div>
 
                                 <textarea

@@ -12,80 +12,106 @@
 
     #include('partials.header')
 
-    <section class="hero-grad border-b border-soft">
-        <div class="max-w-7xl mx-auto px-6 py-16 sm:py-20">
-            <div class="max-w-3xl">
-                <span class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white border border-soft text-xs font-medium text-ink-soft mb-6">
-                    <span class="w-1.5 h-1.5 rounded-full bg-green-a animate-pulse"></span>
-                    The official Doppar news hub
-                </span>
-                <h1 class="font-display text-4xl sm:text-5xl lg:text-6xl font-bold leading-[1.05] tracking-tight text-ink">
-                    Everything Doppar,
-                    <br class="hidden sm:block">
-                    <span class="text-primary italic">as it ships</span>.
-                </h1>
-                <p class="mt-6 text-lg text-ink-soft max-w-2xl leading-relaxed">
-                    Release notes, RFCs, tutorials and package announcements from the Doppar core team and community —
-                    curated in one place, for the PHP framework that reads like prose and runs like a machine.
-                </p>
-                <div class="mt-8 flex flex-wrap items-center gap-3">
-                    <a href="/?tab=for-you" class="chip border-soft text-ink hover:bg-primary hover:text-[#fefefe] hover:border-transparent transition-colors">All stories</a>
-                    <a href="/?tab=featured" class="chip border-soft text-ink hover:bg-amber-a hover:text-ink hover:border-transparent transition-colors">★ Featured</a>
-                </div>
-            </div>
-        </div>
-    </section>
-
     <!-- ================= MAIN ================= -->
     <main class="flex-1">
-        <div class="max-w-7xl mx-auto px-6 py-12 lg:py-16 grid lg:grid-cols-[1fr_300px] gap-12">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 py-8 lg:py-10 grid lg:grid-cols-[250px_minmax(0,1fr)_290px] gap-6">
 
-            <!-- LEFT: feed -->
+            <!-- LEFT: profile card -->
+            <aside class="hidden lg:block lg:sticky lg:top-24 lg:self-start space-y-4">
+                <div class="feed-card text-center">
+                    <div class="side-banner"></div>
+                    <div class="-mt-8 px-5 pb-5">
+                        <span class="mx-auto grid place-items-center w-16 h-16 rounded-full bg-white ring-4 ring-white shadow">
+                            <img src="/logo-icon.png" alt="Doppar" class="h-9 w-auto">
+                        </span>
+                        <h1 class="mt-3 font-display text-lg font-bold text-ink leading-tight">Doppar News</h1>
+                        <p class="mt-1 text-[13px] text-ink-soft leading-snug">Releases, tutorials and community updates from the Doppar PHP framework.</p>
+                    </div>
+                    <div class="border-t border-soft px-2 py-2 text-left text-sm font-medium">
+                        <a href="[[ $filterUrl(['tab' => 'for-you']) ]]" class="flex items-center justify-between px-3 py-2 rounded-lg [[ $tab === 'for-you' ? 'bg-[rgba(109,108,243,.1)] text-primary' : 'text-ink-soft hover:bg-[rgba(26,26,26,.04)]' ]]">All stories</a>
+                        <a href="[[ $filterUrl(['tab' => 'featured']) ]]" class="flex items-center justify-between px-3 py-2 rounded-lg [[ $tab === 'featured' ? 'bg-[rgba(109,108,243,.1)] text-primary' : 'text-ink-soft hover:bg-[rgba(26,26,26,.04)]' ]]">★ Featured</a>
+                    </div>
+                </div>
+
+                #include('partials.feed-filters')
+            </aside>
+
+            <!-- CENTER: feed -->
             <div class="min-w-0">
-                <!-- Section heading + tabs -->
-                <div class="flex items-end justify-between mb-8 pb-4 border-b border-soft">
+                <!-- Mobile / tablet intro + tabs -->
+                <div class="feed-card px-5 py-4 mb-4 flex items-center justify-between gap-3">
                     <div>
-                        <h2 class="font-display text-2xl sm:text-3xl font-bold tracking-tight text-ink">
+                        <h2 class="font-display text-xl font-bold tracking-tight text-ink">
                             [[ $tab === 'featured' ? 'Featured stories' : 'Latest stories' ]]
                         </h2>
-                        <p class="text-sm text-ink-soft mt-1">Hand-picked writing from the Doppar team and community.</p>
+                        <p class="text-[13px] text-ink-soft mt-0.5">From the Doppar team and community.</p>
+                        #if ($hasFilters)
+                        <div class="mt-2 flex flex-wrap items-center gap-2">
+                            #if ($activeCategory)
+                            <span class="active-filter">[[ $activeCategory->name ]]
+                                <a href="[[ $filterUrl(['category' => null]) ]]" aria-label="Remove category filter">×</a>
+                            </span>
+                            #endif
+                            #if ($activeTag)
+                            <span class="active-filter">Tag: [[ $activeTag->name ]]
+                                <a href="[[ $filterUrl(['tag' => null]) ]]" aria-label="Remove tag filter">×</a>
+                            </span>
+                            #endif
+                        </div>
+                        #endif
                     </div>
-                    <div class="hidden sm:flex items-center gap-1 p-1 rounded-full bg-white border border-soft">
-                        <a href="/?tab=for-you"
-                            class="px-4 py-1.5 rounded-full text-sm font-medium transition-colors [[ $tab === 'for-you' ? 'bg-ink text-[#fefefe]' : 'text-ink-soft hover:text-ink' ]]">
+                    <div class="flex items-center gap-1 p-1 rounded-full bg-[#f1f2fa]">
+                        <a href="[[ $filterUrl(['tab' => 'for-you']) ]]"
+                            class="px-3.5 py-1.5 rounded-full text-sm font-medium whitespace-nowrap transition-colors [[ $tab === 'for-you' ? 'bg-ink text-[#fefefe]' : 'text-ink-soft hover:text-ink' ]]">
                             For you
                         </a>
-                        <a href="/?tab=featured"
-                            class="px-4 py-1.5 rounded-full text-sm font-medium transition-colors [[ $tab === 'featured' ? 'bg-ink text-[#fefefe]' : 'text-ink-soft hover:text-ink' ]]">
+                        <a href="[[ $filterUrl(['tab' => 'featured']) ]]"
+                            class="px-3.5 py-1.5 rounded-full text-sm font-medium whitespace-nowrap transition-colors [[ $tab === 'featured' ? 'bg-ink text-[#fefefe]' : 'text-ink-soft hover:text-ink' ]]">
                             Featured
                         </a>
                     </div>
                 </div>
 
-                <div id="post-list" class="grid sm:grid-cols-2 gap-6">
+                <!-- Filters on small screens (the sidebar is hidden there) -->
+                <details class="lg:hidden mb-4 feed-card" [[ $hasFilters ? 'open' : '' ]]>
+                    <summary class="flex items-center justify-between px-5 py-3 text-sm font-semibold text-ink cursor-pointer">
+                        Filter by category or tag
+                        <span class="text-[12px] font-medium text-primary">[[ $hasFilters ? 'Active' : '' ]]</span>
+                    </summary>
+                    <div class="pb-2">
+                        #include('partials.feed-filters')
+                    </div>
+                </details>
+
+                <div id="post-list" class="flex flex-col gap-4">
                     #include('partials.post-list-items', ['posts' => $posts['data']])
                 </div>
 
                 #if ($showEmptyState)
-                <div class="py-24 text-center border border-dashed border-soft rounded-2xl">
-                    <div class="w-14 h-14 mx-auto mb-4 rounded-2xl bg-white border border-soft grid place-items-center">
+                <div class="feed-card py-20 text-center">
+                    <div class="w-14 h-14 mx-auto mb-4 rounded-2xl bg-[#f1f2fa] grid place-items-center">
                         <svg class="w-6 h-6 text-muted" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z" />
                         </svg>
                     </div>
+                    #if ($hasFilters)
+                    <p class="text-base font-medium text-ink">No stories match these filters</p>
+                    <p class="text-sm text-ink-soft mt-1">Try a different category or tag, or <a href="[[ $filterUrl(['category' => null, 'tag' => null]) ]]" class="text-primary font-medium hover:underline">clear the filters</a>.</p>
+                    #else
                     <p class="text-base font-medium text-ink">No stories published yet</p>
                     <p class="text-sm text-ink-soft mt-1">Check back soon — fresh writing is on the way.</p>
+                    #endif
                 </div>
                 #endif
 
                 #if ($loadMore['has_more'])
-                <div class="py-12 flex items-center justify-center">
+                <div class="py-8 flex items-center justify-center">
                     <button
                         type="button"
                         id="load-more-posts"
                         data-next-url="[[ $loadMore['next_url'] ]]"
-                        class="group inline-flex items-center gap-2 px-6 py-3 rounded-full border border-ink text-sm font-medium text-ink hover:bg-ink hover:text-[#fefefe] transition-colors">
-                        Load more stories
+                        class="group inline-flex items-center gap-2 px-6 py-2.5 rounded-full bg-white border border-soft shadow-sm text-sm font-semibold text-primary hover:bg-primary hover:text-[#fefefe] hover:border-transparent transition-colors">
+                        Show more stories
                         <svg class="w-4 h-4 group-hover:translate-y-0.5 transition-transform" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
                         </svg>
@@ -95,8 +121,8 @@
             </div>
 
             <!-- RIGHT: sidebar -->
-            <aside class="space-y-8 lg:sticky lg:top-24 lg:self-start">
-                <div class="rounded-2xl p-6 text-[#fefefe] relative overflow-hidden" style="background: linear-gradient(135deg, var(--c-ink) 0%, #2a2a2a 100%);">
+            <aside class="hidden lg:block space-y-4 lg:sticky lg:top-24 lg:self-start">
+                <div class="rounded-[14px] p-6 text-[#fefefe] relative overflow-hidden" style="background: linear-gradient(135deg, var(--c-ink) 0%, #2a2a2a 100%);">
                     <div class="absolute -top-8 -right-8 w-32 h-32 rounded-full" style="background: radial-gradient(circle, rgba(109,108,243,.5), transparent 70%);"></div>
                     <div class="relative">
                         <div class="font-mono text-[10px] tracking-widest text-cyan-a mb-2">// PSST</div>
@@ -106,6 +132,15 @@
                             Read the docs →
                         </a>
                     </div>
+                </div>
+
+                <div class="feed-card p-5">
+                    <h3 class="text-[15px] font-semibold text-ink mb-3">Join the community</h3>
+                    <ul class="space-y-2 text-sm text-ink-soft">
+                        <li><a href="https://github.com/doppar/framework/issues" target="_blank" rel="noopener noreferrer" class="hover:text-primary transition-colors">Request a feature →</a></li>
+                        <li><a href="https://www.linkedin.com/company/doppar/posts/?feedView=all" target="_blank" rel="noopener noreferrer" class="hover:text-primary transition-colors">Follow on LinkedIn →</a></li>
+                        <li><a href="https://x.com/dopparframework" target="_blank" rel="noopener noreferrer" class="hover:text-primary transition-colors">Follow on X →</a></li>
+                    </ul>
                 </div>
             </aside>
 

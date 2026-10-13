@@ -2392,17 +2392,44 @@
     flex-wrap: wrap;
 }
 
+.admin-rich-editor__footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 8px 16px;
+    border-top: 1px solid var(--admin-border-soft);
+    background: rgba(249, 251, 254, 0.96);
+    color: var(--admin-text-muted, #7a8da8);
+    font-size: 0.8rem;
+}
+
+.admin-rich-editor__footer strong {
+    color: var(--admin-text-dark);
+    font-weight: 700;
+}
+
+.admin-rich-editor__error {
+    margin: 0;
+    padding: 8px 16px;
+    background: rgba(220, 53, 69, 0.08);
+    color: #b42334;
+    font-size: 0.85rem;
+    font-weight: 600;
+}
+
 .admin-rich-editor__canvas {
-    min-height: 300px;
-    max-height: 300px;
+    min-height: 420px;
+    max-height: 72vh;
     overflow-y: auto;
+    resize: vertical;
     padding: 22px 24px;
     background: #ffffff;
     overscroll-behavior: contain;
 }
 
 .admin-prose {
-    min-height: 248px;
+    min-height: 368px;
     outline: none;
     color: var(--admin-text-dark);
     font-size: 1.04rem;
@@ -2419,6 +2446,22 @@
 
 .admin-prose p {
     margin: 0 0 1.1em;
+}
+
+/* List items and quotes wrap their text in <p>; keep them tight. */
+.admin-prose li > p,
+.admin-prose blockquote > p {
+    margin: 0;
+}
+
+.admin-prose li > p + p,
+.admin-prose blockquote > p + p {
+    margin-top: 0.7em;
+}
+
+.admin-prose li > ul,
+.admin-prose li > ol {
+    margin: 0.4em 0 0;
 }
 
 .admin-prose h2,

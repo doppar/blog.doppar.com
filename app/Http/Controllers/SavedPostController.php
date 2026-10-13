@@ -31,12 +31,12 @@ class SavedPostController extends Controller
             cursor: $request->query('cursor')
         );
 
-        $posts = $this->decoratePostsWithAccent(
+        $posts = $this->decoratePostsWithEngagement($this->decoratePostsWithAccent(
             array_values(array_filter(array_map(
                 fn($savedPost) => $savedPost->post,
                 $saved['data'] ?? []
             )))
-        );
+        ));
 
         $loadMore = $this->resolveLoadMoreState(
             query: $query,

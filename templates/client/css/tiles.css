@@ -382,7 +382,7 @@ body.dp :focus-visible { outline: 3px solid var(--dp-violet); outline-offset: 3p
 /* the first element in a tile's link row should clear the curved corner */
 .dp-tile--ink { padding-bottom: clamp(36px, 5vw, 52px); }
 
-.dp-post-head { position: relative; overflow: hidden; padding: clamp(32px, 5.5vw, 76px) 0 clamp(26px, 4vw, 44px); }
+.dp-post-head { position: relative; overflow-x: clip; padding: clamp(32px, 5.5vw, 76px) 0 clamp(26px, 4vw, 44px); }
 .dp-post-head::after {
     content: ""; position: absolute; right: -70px; top: -70px; width: clamp(150px, 22vw, 300px); aspect-ratio: 1; z-index: 0;
     background: var(--dp-volt); border-bottom-left-radius: 100%;
@@ -597,3 +597,9 @@ body.dp-auth .auth-card__foot a { color: var(--dp-violet); font-weight: 700; }
 .dp-head .admin-dropdown__row:hover { background: var(--dp-volt); color: var(--dp-ink); }
 .dp-head .admin-dropdown__row--danger:hover { background: var(--dp-ink); color: var(--dp-volt); }
 .dp-head .admin-dropdown__row--danger:hover svg { color: var(--dp-volt); }
+
+/* footer: buttons keep their own colours, and the hover fill is light so the
+   button never melts into the dark footer */
+.dp-foot a.dp-btn--volt, .dp-foot .dp-flinks a.dp-btn--volt { color: var(--dp-ink); text-decoration: none; }
+.dp-foot a.dp-btn--volt::before { background: var(--dp-paper); }
+.dp-foot a.dp-btn--volt:hover, .dp-foot .dp-flinks a.dp-btn--volt:hover { color: var(--dp-ink); text-decoration: none; }

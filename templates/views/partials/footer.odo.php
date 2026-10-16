@@ -56,7 +56,7 @@
                 <div class="dp-flinks">
                     <a href="https://x.com/dopparframework" target="_blank" rel="noopener noreferrer">X (Twitter)</a>
                     <a href="https://www.linkedin.com/company/doppar/posts/?feedView=all" target="_blank" rel="noopener noreferrer">LinkedIn</a>
-                    <a href="https://www.buymeacoffee.com/mahedisulaa" target="_blank" rel="noopener noreferrer" class="dp-btn dp-btn--volt" style="margin-top:.6rem;color:var(--dp-ink)">☕ Buy me a coffee</a>
+                    <a href="https://www.buymeacoffee.com/mahedisulaa" target="_blank" rel="noopener noreferrer" class="dp-btn dp-btn--volt" style="margin-top:.6rem">☕ Buy me a coffee</a>
                 </div>
             </div>
         </div>

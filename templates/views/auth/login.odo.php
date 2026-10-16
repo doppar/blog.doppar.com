@@ -7,15 +7,10 @@
 #endsection
 #section('content')
     <main class="auth-shell">
+        #include('partials.auth-side')
         <section class="auth-card">
             <div class="auth-card__brand">
-                <span class="auth-card__mark">
-                    <svg viewBox="0 0 40 40" aria-hidden="true">
-                        <circle cx="20" cy="20" r="17" fill="none" stroke="currentColor" stroke-width="3"></circle>
-                        <path d="M13 21c0-3.5 2.6-6 6.5-6 2.2 0 4.4.8 6.3 2.5" fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="3"></path>
-                        <path d="M27 19c0 3.5-2.6 6-6.5 6-2.2 0-4.4-.8-6.3-2.5" fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="3"></path>
-                    </svg>
-                </span>
+                <span class="auth-card__mark"><img src="/logo-icon.png" alt=""></span>
                 <div>
                     <p class="auth-card__eyebrow">Doppar Blog</p>
                     <h1>Welcome back</h1>

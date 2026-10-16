@@ -8,61 +8,41 @@
 
     #include('partials.header')
 
-    <section class="hero-grad border-b border-soft">
-        <div class="max-w-7xl mx-auto px-6 py-16 sm:py-20">
-            <div class="max-w-3xl">
-                <h1 class="font-display text-4xl sm:text-5xl font-bold leading-[1.05] tracking-tight text-ink">
-                    Your saved stories
-                </h1>
-                <p class="mt-6 text-lg text-ink-soft max-w-2xl leading-relaxed">
-                    Posts you have bookmarked to read later, all in one place.
-                </p>
-            </div>
+    <section class="dp-hero" style="padding-bottom: clamp(20px, 3vw, 36px);">
+        <div class="dp-wrap">
+            <p class="dp-eyebrow">Reading list</p>
+            <h1 style="max-width: 12ch;">Your <span class="dp-mark">saved</span> stories.</h1>
+            <p class="dp-hero__lede">Posts you have bookmarked to read later, all in one place.</p>
         </div>
     </section>
 
     <main class="flex-1">
-        <div class="max-w-7xl mx-auto px-6 py-12 lg:py-16">
+        <div class="dp-wrap" style="padding-top: 8px;">
 
-            <div id="post-list" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div id="post-list" class="dp-ledger">
                 #include('partials.post-list-items', ['posts' => $posts])
             </div>
 
             #if ($showEmptyState)
-            <div class="py-24 text-center border border-dashed border-soft rounded-2xl">
-                <div class="w-14 h-14 mx-auto mb-4 rounded-2xl bg-white border border-soft grid place-items-center">
-                    <svg class="w-6 h-6 text-muted" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M17.593 3.322c1.1.128 1.907 1.077 1.907 2.185V21L12 17.25 4.5 21V5.507c0-1.108.806-2.057 1.907-2.185a48.507 48.507 0 0111.186 0z" />
-                    </svg>
-                </div>
-                <p class="text-base font-medium text-ink">No saved stories yet</p>
-                <p class="text-sm text-ink-soft mt-1">Tap the bookmark icon on any post to save it for later.</p>
+            <div class="dp-empty">
+                <h3>No saved stories yet.</h3>
+                <p>Tap the bookmark on any story to keep it here for later.</p>
+                <p style="margin-top:1.4rem"><a href="/" class="dp-btn">Browse stories</a></p>
             </div>
             #endif
 
             #if ($loadMore['has_more'])
-            <div class="py-12 flex items-center justify-center">
-                <button
-                    type="button"
-                    id="load-more-posts"
-                    data-next-url="[[ $loadMore['next_url'] ]]"
-                    class="group inline-flex items-center gap-2 px-6 py-3 rounded-full border border-ink text-sm font-medium text-ink hover:bg-ink hover:text-[#fefefe] transition-colors">
+            <div class="dp-loadmore">
+                <button type="button" id="load-more-posts" data-next-url="[[ $loadMore['next_url'] ]]" class="dp-btn">
                     Load more stories
-                    <svg class="w-4 h-4 group-hover:translate-y-0.5 transition-transform" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
-                    </svg>
+                    <svg fill="none" stroke="currentColor" stroke-width="2.4" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" /></svg>
                 </button>
             </div>
             #endif
         </div>
     </main>
 
-    <footer class="border-t border-soft mt-12">
-        <div class="max-w-2xl mx-auto px-6 py-14 text-center">
-            <img src="/logo.png" alt="Doppar" class="h-8 mx-auto mb-3">
-            <p class="text-xs text-ink-soft">© [[ date('Y') ]] Doppar. All Rights Reserved.</p>
-        </div>
-    </footer>
+    #include('partials.footer')
 
 </div>
 

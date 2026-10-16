@@ -7,6 +7,7 @@
 #endsection
 #section('content')
     <main class="auth-shell">
+        #include('partials.auth-side')
         <section class="auth-card auth-card--narrow">
             <div class="auth-card__brand">
                 <span class="auth-card__mark auth-card__mark--secure">

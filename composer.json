@@ -9,20 +9,20 @@
         "Doppar"
     ],
     "require": {
-        "php": "^8.3",
-        "doppar/ai": "^1.4",
-        "doppar/framework": "3.*",
-        "doppar/oauthic": "^1.0"
+        "php": "^8.5",
+        "doppar/ai": "^4.1",
+        "doppar/framework": "4.*",
+        "doppar/oauthic": "^4.0"
     },
     "require-dev": {
-        "fakerphp/faker": "^1.23",
+        "fakerphp/faker": "^1.24",
         "mockery/mockery": "^1.6",
-        "phpunit/phpunit": "^12.5"
+        "phpunit/phpunit": "^13.2"
     },
     "autoload": {
         "psr-4": {
-            "App\\": "app/",
-            "Database\\Seeders\\": "database/seeders/"
+            "App\\": "src/",
+            "Database\\Seeders\\": "schema/seeders/"
         }
     },
     "autoload-dev": {
@@ -32,13 +32,13 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "3.x-dev"
+            "dev-master": "4.x-dev"
         }
     },
     "scripts": {
         "setup": [
             "composer install",
-            "@php -r \"file_exists('.env') || copy('.env.example', '.env');\"",
+            "@php -r \"file_exists('env.toml') || copy('env.toml.example', 'env.toml');\"",
             "@php pool key:generate",
             "@php pool migrate"
         ],
@@ -51,13 +51,13 @@
         "post-create-project-cmd": [
             "Phaseolies\\Installer::postCreateProject",
             "@php pool key:generate --ansi",
-            "@php -r \"file_exists('database/database.sqlite') || touch('database/database.sqlite');\"",
+            "@php -r \"file_exists('schema/database.sqlite') || touch('schema/database.sqlite');\"",
             "@php pool boost --ansi",
             "@php pool migrate --ansi",
             "@php pool frontend:install --force"
         ],
         "post-root-package-install": [
-            "@php -r \"file_exists('.env') || copy('.env.example', '.env');\""
+            "@php -r \"file_exists('env.toml') || copy('env.toml.example', 'env.toml');\""
         ]
     },
     "config": {

@@ -22,26 +22,26 @@
     <article class="flex-1">
 
         <!-- Title block -->
-        <div class="hero-grad">
-            <div class="max-w-3xl mx-auto px-6 py-14 sm:py-20">
+        <div class="dp-post-head">
+            <div class="dp-wrap">
 
                 #if ($post->category)
-                <a href="/" class="chip mb-6 bg-white text-primary">
-                    <span class="w-1.5 h-1.5 rounded-full bg-primary"></span>
+                <a href="/" class="dp-chip" style="--chip: var(--dp-violet);">
+                    <i></i>
                     [[ $post->category->name ]]
                 </a>
                 #endif
 
-                <h1 class="font-display text-4xl sm:text-5xl lg:text-[56px] font-bold leading-[1.08] tracking-tight text-ink">
+                <h1 class="dp-post-title">
                     [[ $post->title ]]
                 </h1>
 
-                <div class="mt-8 flex flex-wrap items-center gap-x-5 gap-y-3">
+                <div class="dp-post-by">
                     <div class="flex items-center gap-3">
                         #if (($post->user->image ?? '') !== '')
-                        <img src="[[ $post->user->image ]]" alt="[[ $post->user->name ]]" class="w-11 h-11 rounded-full object-cover">
+                        <img src="[[ $post->user->image ]]" alt="[[ $post->user->name ]]" class="dp-avatar">
                         #else
-                        <div class="w-11 h-11 rounded-full bg-primary grid place-items-center text-sm font-bold text-[#fefefe]">
+                        <div class="dp-avatar dp-avatar--letter">
                             [[ strtoupper(substr($post->user->name ?? 'A', 0, 1)) ]]
                         </div>
                         #endif
@@ -53,7 +53,7 @@
                         </div>
                     </div>
 
-                    <div class="flex items-center gap-4 ml-auto text-[13px] text-ink-soft">
+                    <div class="dp-post-meta">
                         <span class="flex items-center gap-1.5">
                             <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M20.25 8.511c.884.284 1.5 1.128 1.5 2.097v4.286c0 1.136-.847 2.1-1.98 2.193-.34.027-.68.052-1.02.072v3.091l-3-3c-1.354 0-2.694-.055-4.02-.163a2.115 2.115 0 01-.825-.242m9.345-8.334a2.126 2.126 0 00-.476-.095 48.64 48.64 0 00-8.048 0c-1.131.094-1.976 1.057-1.976 2.192v4.286c0 .837.46 1.58 1.155 1.951m9.345-8.334V6.637c0-1.621-1.152-3.026-2.76-3.235A48.455 48.455 0 0011.25 3c-2.115 0-4.198.137-6.24.402-1.608.209-2.76 1.614-2.76 3.235v6.226c0 1.621 1.152 3.026 2.76 3.235.577.075 1.157.14 1.74.194V21l4.155-4.155" />
@@ -80,14 +80,14 @@
                         $viewerHasSaved = auth()->check() && $post->savedPosts()->where('user_id', auth()->id())->exists();
                         #endphp
                         #if (auth()->check())
-                        <button type="button" id="save-btn" data-slug="[[ $post->slug ]]" data-saved="[[ $viewerHasSaved ? '1' : '0' ]]" class="flex items-center gap-1.5 hover:text-ink transition-colors [[ $viewerHasSaved ? 'text-primary' : '' ]]" aria-label="Save this post" aria-pressed="[[ $viewerHasSaved ? 'true' : 'false' ]]">
+                        <button type="button" id="save-btn" data-slug="[[ $post->slug ]]" data-saved="[[ $viewerHasSaved ? '1' : '0' ]]" class="dp-act [[ $viewerHasSaved ? 'text-primary' : '' ]]" aria-label="Save this post" aria-pressed="[[ $viewerHasSaved ? 'true' : 'false' ]]">
                             <svg id="save-icon" class="w-4 h-4" fill="[[ $viewerHasSaved ? 'currentColor' : 'none' ]]" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M17.593 3.322c1.1.128 1.907 1.077 1.907 2.185V21L12 17.25 4.5 21V5.507c0-1.108.806-2.057 1.907-2.185a48.507 48.507 0 0111.186 0z" />
                             </svg>
                             <span id="save-text">[[ $viewerHasSaved ? 'Saved' : 'Save' ]]</span>
                         </button>
                         #else
-                        <a href="[[ route('login') . '?redirect_to=' . urlencode(request()->getPath()) ]]" class="flex items-center gap-1.5 hover:text-ink transition-colors" aria-label="Log in to save this post">
+                        <a href="[[ route('login') . '?redirect_to=' . urlencode(request()->getPath()) ]]" class="dp-act" aria-label="Log in to save this post">
                             <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M17.593 3.322c1.1.128 1.907 1.077 1.907 2.185V21L12 17.25 4.5 21V5.507c0-1.108.806-2.057 1.907-2.185a48.507 48.507 0 0111.186 0z" />
                             </svg>
@@ -96,7 +96,7 @@
                         #endif
 
                         <div class="relative share-widget">
-                            <button type="button" class="share-trigger flex items-center gap-1.5 hover:text-ink transition-colors" aria-label="Share this post" aria-haspopup="true" aria-expanded="false">
+                            <button type="button" class="share-trigger dp-act" aria-label="Share this post" aria-haspopup="true" aria-expanded="false">
                                 <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" d="M7.217 10.907a2.25 2.25 0 100 2.186m0-2.186c.18.324.283.696.283 1.093s-.103.77-.283 1.093m0-2.186l9.566-5.314m-9.566 7.5l9.566 5.314m0 0a2.25 2.25 0 103.935 2.186 2.25 2.25 0 00-3.935-2.186zm0-12.814a2.25 2.25 0 103.933-2.185 2.25 2.25 0 00-3.933 2.185z" />
                                 </svg>
@@ -142,38 +142,42 @@
 
         <!-- Cover -->
         #if ($post->cover_image)
-        <figure class="max-w-3xl mx-auto px-6 -mt-6 sm:-mt-10">
+        <figure class="dp-wrap dp-post-cover">
             <img
                 src="[[ $post->cover_image ]]"
                 alt="[[ $post->title ]]"
-                class="w-full max-h-[520px] object-cover rounded-2xl shadow-[0_20px_60px_-30px_rgba(26,26,26,0.4)] bg-white">
+                class="dp-post-cover__img">
         </figure>
         #endif
 
         <!-- Body -->
-        <div class="max-w-3xl mx-auto px-6 py-14">
+        <div class="dp-wrap dp-read-wrap">
+          <div class="dp-read">
+            <aside class="dp-read__rail"><div class="dp-read__rail-in">
             <!-- Table of Contents -->
-            <div id="toc-container" class="hidden mb-8 p-6 rounded-xl border border-soft bg-white">
-                <button type="button" id="toc-toggle" class="flex items-center justify-between w-full text-left">
-                    <h3 class="font-display text-sm font-bold tracking-wide uppercase text-ink-soft">Table of Contents</h3>
+            <div id="toc-container" class="hidden dp-toc">
+                <button type="button" id="toc-toggle" class="dp-toc__head">
+                    <h3 class="dp-eyebrow">On this page</h3>
                     <svg id="toc-icon" class="w-5 h-5 text-ink-soft transition-transform duration-200" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
                     </svg>
                 </button>
-                <nav id="toc" class="space-y-2 text-sm mt-4 hidden"></nav>
+                <nav id="toc" class="dp-toc__list hidden"></nav>
             </div>
 
+            </div></aside>
+            <div class="dp-read__col">
             <div class="prose-article">
                 [[! $post->body !]]
             </div>
 
             <!-- Like Button -->
-            <div class="mt-8 pt-8 border-t border-soft">
+            <div class="dp-like-wrap">
                 #php
                 $viewerHasLiked = auth()->check() && $post->likes()->where('user_id', auth()->id())->exists();
                 #endphp
                 #if (auth()->check())
-                <button type="button" id="like-btn" data-slug="[[ $post->slug ]]" data-liked="[[ $viewerHasLiked ? '1' : '0' ]]" class="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-soft text-sm font-medium text-ink hover:border-primary hover:text-primary transition-colors [[ $viewerHasLiked ? 'text-primary' : '' ]]">
+                <button type="button" id="like-btn" data-slug="[[ $post->slug ]]" data-liked="[[ $viewerHasLiked ? '1' : '0' ]]" class="dp-like dp-like--big [[ $viewerHasLiked ? 'text-primary' : '' ]]">
                     <svg id="like-icon" class="w-5 h-5" fill="[[ $viewerHasLiked ? 'currentColor' : 'none' ]]" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" />
                     </svg>
@@ -181,7 +185,7 @@
                     <span id="like-text">[[ $viewerHasLiked ? 'Liked' : 'Like' ]]</span>
                 </button>
                 #else
-                <a href="[[ route('login') . '?redirect_to=' . urlencode(request()->getPath()) ]]" class="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-soft text-sm font-medium text-ink hover:border-primary hover:text-primary transition-colors">
+                <a href="[[ route('login') . '?redirect_to=' . urlencode(request()->getPath()) ]]" class="dp-like dp-like--big">
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" />
                     </svg>
@@ -192,10 +196,10 @@
             </div>
 
             <!-- Comments Section -->
-            <div class="mt-12 pt-8 border-t border-soft">
-                <div class="flex items-center justify-between mb-6 flex-wrap gap-3">
-                    <h3 id="comments-heading" class="font-display text-xl font-bold text-ink">Comments (<span id="comments-count">[[ $post->comments_count ?? 0 ]]</span>)</h3>
-                    <select id="comment-sort" class="text-sm border border-soft rounded-full pl-3 pr-8 py-1.5 bg-white text-ink focus:outline-none focus:border-primary">
+            <div class="dp-comments">
+                <div class="dp-comments__head">
+                    <h3 id="comments-heading">Comments (<span id="comments-count">[[ $post->comments_count ?? 0 ]]</span>)</h3>
+                    <select id="comment-sort" class="dp-select">
                         <option value="newest">Newest</option>
                         <option value="oldest">Oldest</option>
                     </select>
@@ -210,12 +214,12 @@
                             id="comment-body"
                             rows="4"
                             placeholder="Write a comment..."
-                            class="w-full px-4 py-3 rounded-xl border border-soft bg-white text-ink placeholder-ink-soft focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all resize-none"
+                            class="dp-textarea"
                             required></textarea>
                         <p id="comment-form-error" class="mt-2 text-sm text-red-500 hidden"></p>
                     </div>
                     <div class="flex justify-end">
-                        <button type="submit" class="inline-flex items-center gap-2 px-6 py-2.5 rounded-full bg-primary text-white font-medium hover:brightness-110 transition-all">
+                        <button type="submit" class="dp-btn">
                             Post Comment
                         </button>
                     </div>
@@ -238,7 +242,7 @@
 
                 #if ($commentsPage['next_page_url'])
                 <div id="load-more-wrapper" class="mt-6 flex justify-center">
-                    <button type="button" id="load-more-comments" data-next-page="2" class="inline-flex items-center gap-2 px-6 py-2.5 rounded-full border border-soft text-sm font-medium text-ink hover:border-primary hover:text-primary transition-colors">
+                    <button type="button" id="load-more-comments" data-next-page="2" class="dp-btn dp-btn--ghost">
                         Load more comments
                     </button>
                 </div>
@@ -246,22 +250,24 @@
             </div>
 
             #if ($post->tags && count($post->tags) > 0)
-            <div class="mt-14 pt-8">
-                <h3 class="font-display text-sm font-bold tracking-wide uppercase text-ink-soft mb-3">Tagged with</h3>
-                <div class="flex flex-wrap gap-2">
+            <div class="dp-post-tags">
+                <h3 class="dp-eyebrow">Tagged with</h3>
+                <div class="dp-post-tags__list">
                     #foreach ($post->tags as $tag)
                     <span class="tag-pill">[[ $tag->name ]]</span>
                     #endforeach
                 </div>
             </div>
             #endif
+            </div>
+          </div>
         </div>
 
         <!-- Share -->
-        <div class="max-w-3xl mx-auto px-6 py-8">
+        <div class="dp-read dp-read--foot">
             <div class="flex items-center justify-between">
                 <div class="relative share-widget">
-                    <button type="button" class="share-trigger inline-flex items-center gap-2 px-4 py-2 rounded-full border border-soft text-sm font-medium text-ink hover:border-ink transition-colors" aria-label="Share this post" aria-haspopup="true" aria-expanded="false">
+                    <button type="button" class="share-trigger dp-btn dp-btn--ghost" aria-label="Share this post" aria-haspopup="true" aria-expanded="false">
                         <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M7.217 10.907a2.25 2.25 0 100 2.186m0-2.186c.18.324.283.696.283 1.093s-.103.77-.283 1.093m0-2.186l9.566-5.314m-9.566 7.5l9.566 5.314m0 0a2.25 2.25 0 103.935 2.186 2.25 2.25 0 00-3.935-2.186zm0-12.814a2.25 2.25 0 103.933-2.185 2.25 2.25 0 00-3.933 2.185z" />
                         </svg>
@@ -306,99 +312,33 @@
                         </button>
                     </div>
                 </div>
-                <a href="/" class="inline-flex items-center gap-1.5 px-4 py-2 rounded-full border border-soft text-sm font-medium text-ink hover:border-ink transition-colors">
+                <a href="/" class="dp-btn dp-btn--ghost">
                     More stories
                 </a>
             </div>
         </div>
 
-        <div class="max-w-3xl mx-auto px-6 py-8 flex items-center justify-between">
-            <a href="/" class="inline-flex items-center gap-2 text-sm text-ink-soft hover:text-ink transition-colors">
+        <div class="dp-read dp-read--foot flex items-center justify-between">
+            <a href="/" class="dp-textlink">
                 <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18" />
                 </svg>
                 Back to all stories
             </a>
             <button type="button" onclick="window.scrollTo({top:0, behavior:'smooth'})"
-                class="inline-flex items-center gap-2 text-sm text-ink-soft hover:text-ink transition-colors">
+                class="dp-textlink">
                 Top
                 <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 10.5L12 3m0 0l7.5 7.5M12 3v18" />
                 </svg>
             </button>
         </div>
-</div>
 
 </article>
 
-<!-- Footer -->
-<footer class="relative overflow-hidden border-t border-soft mt-12">
-    <div class="absolute top-1/2 left-1/4 -translate-x-1/2 -translate-y-1/2 w-72 h-72 rounded-full blur-[100px] pointer-events-none" style="background:rgba(109,108,243,.10)"></div>
-    <div class="absolute top-1/2 right-1/4 translate-x-1/2 -translate-y-1/2 w-72 h-72 rounded-full blur-[100px] pointer-events-none" style="background:rgba(28,176,238,.10)"></div>
+#include('partials.footer')
+<div id="cover_image_for_js" hidden>[[! $post->cover_image ?? '' !]]</div>
 
-    <div class="relative max-w-2xl mx-auto px-6 py-14">
-        <!-- Brand -->
-        <div class="text-center mb-8">
-            <img src="/logo.png" alt="Doppar" class="h-8 mx-auto mb-3">
-            <p class="text-xs text-ink-soft">© [[ date('Y') ]] Doppar. All Rights Reserved.</p>
-        </div>
-
-        <!-- Grid -->
-        <div class="grid grid-cols-2 sm:grid-cols-4 gap-8 sm:gap-4 text-sm">
-            <div>
-                <h4 class="text-primary font-semibold mb-2">Links</h4>
-                <ul class="space-y-1.5 text-ink-soft">
-                    <li><a href="https://doppar.com/versions/4.x/credits" target="_blank" rel="noopener noreferrer" class="hover:text-ink transition-colors">Credits</a></li>
-                    <li><a href="https://doppar.com/versions/4.x/installation" target="_blank" rel="noopener noreferrer" class="hover:text-ink transition-colors">Getting started</a></li>
-                    <li><a href="https://doppar.com/versions/4.x/releases" target="_blank" rel="noopener noreferrer" class="hover:text-ink transition-colors">Release notes</a></li>
-                    <li><a href="https://doppar.com/versions/4.x/contributions" target="_blank" rel="noopener noreferrer" class="hover:text-ink transition-colors">Contributions</a></li>
-                </ul>
-            </div>
-
-            <div>
-                <h4 class="text-primary font-semibold mb-2">Get Involved</h4>
-                <ul class="space-y-1.5 text-ink-soft">
-                    <li><a href="https://discord.gg/Hz3tq294J" target="_blank" rel="noopener noreferrer" class="hover:text-ink transition-colors">Join community</a></li>
-                    <li><a href="https://github.com/doppar/framework/issues" target="_blank" rel="noopener noreferrer" class="hover:text-ink transition-colors">Request features</a></li>
-                </ul>
-            </div>
-
-            <div>
-                <h4 class="text-primary font-semibold mb-2">Ecosystem</h4>
-                <ul class="space-y-1.5 text-ink-soft">
-                    <li><a href="https://doppar.com/versions/4.x/doppar-ai" target="_blank" rel="noopener noreferrer" class="hover:text-ink transition-colors">AI</a></li>
-                    <li><a href="https://doppar.com/versions/4.x/doppar-queue" target="_blank" rel="noopener noreferrer" class="hover:text-ink transition-colors">Queue</a></li>
-                    <li><a href="https://doppar.com/versions/4.x/doppar-airbend" target="_blank" rel="noopener noreferrer" class="hover:text-ink transition-colors">Airbend</a></li>
-                    <li><a href="https://doppar.com/versions/4.x/doppar-flarion" target="_blank" rel="noopener noreferrer" class="hover:text-ink transition-colors">Flarion</a></li>
-                    <li><a href="https://doppar.com/versions/4.x/doppar-notifier" target="_blank" rel="noopener noreferrer" class="hover:text-ink transition-colors">Notifier</a></li>
-                    <li><a href="https://doppar.com/versions/4.x/doppar-orion" target="_blank" rel="noopener noreferrer" class="hover:text-ink transition-colors">Orion</a></li>
-                    <li><a href="https://doppar.com/versions/4.x/doppar-guard" target="_blank" rel="noopener noreferrer" class="hover:text-ink transition-colors">Guard</a></li>
-                    <li><a href="https://doppar.com/versions/4.x/doppar-axios" target="_blank" rel="noopener noreferrer" class="hover:text-ink transition-colors">Axios</a></li>
-                    <li><a href="https://doppar.com/versions/4.x/doppar-oauthic" target="_blank" rel="noopener noreferrer" class="hover:text-ink transition-colors">OAuthic</a></li>
-                    <li><a href="https://doppar.com/versions/4.x/doppar-bloom" target="_blank" rel="noopener noreferrer" class="hover:text-ink transition-colors">Bloom</a></li>
-                    <li><a href="https://doppar.com/versions/4.x/doppar-insight" target="_blank" rel="noopener noreferrer" class="hover:text-ink transition-colors">Insight</a></li>
-                    <li><a href="https://doppar.com/versions/4.x/doppar-twig-bridge" target="_blank" rel="noopener noreferrer" class="hover:text-ink transition-colors">Twig Bridge</a></li>
-                </ul>
-            </div>
-
-            <div>
-                <h4 class="text-primary font-semibold mb-2">Connect</h4>
-                <div class="flex flex-col items-start gap-1.5 text-ink-soft">
-                    <a href="https://x.com/dopparframework" target="_blank" rel="noopener noreferrer" class="hover:text-ink transition-colors">X (Twitter)</a>
-                    <a href="https://www.linkedin.com/company/doppar/posts/?feedView=all" target="_blank" rel="noopener noreferrer" class="hover:text-ink transition-colors">LinkedIn</a>
-                    <a href="https://www.buymeacoffee.com/mahedisulaa" target="_blank" rel="noopener noreferrer" class="mt-1.5 inline-flex items-center gap-1.5 bg-amber-a hover:brightness-95 text-ink text-xs px-3 py-1.5 rounded-md font-semibold transition-all w-fit">
-                        ☕ Buy me a coffee
-                    </a>
-                </div>
-            </div>
-        </div>
-
-        <div class="mt-10 flex justify-center">
-            <p class="text-sm font-medium text-ink-soft">Made with Doppar</p>
-        </div>
-    </div>
-    <div id="cover_image_for_js" hidden>[[! $post->cover_image ?? '' !]]</div>
-</footer>
 
 </div>
 
@@ -563,12 +503,12 @@
             const link = document.createElement('a');
             link.href = `#${id}`;
             link.textContent = heading.textContent;
-            link.className = 'block text-ink-soft hover:text-primary transition-colors py-1';
+            link.className = 'dp-toc__link';
 
             if (heading.tagName === 'H3') {
-                link.classList.add('pl-4', 'text-xs');
+                link.classList.add('is-sub');
             } else {
-                link.classList.add('font-medium');
+                
             }
 
             link.addEventListener('click', (e) => {
@@ -582,8 +522,10 @@
             toc.appendChild(link);
         });
 
-        // Toggle functionality
-        let isCollapsed = true;
+        // Toggle functionality: open by default in the wide-screen rail
+        let isCollapsed = !window.matchMedia('(min-width: 1360px)').matches;
+        toc.classList.toggle('hidden', isCollapsed);
+        tocIcon.style.transform = isCollapsed ? 'rotate(0deg)' : 'rotate(90deg)';
         tocToggle.addEventListener('click', () => {
             isCollapsed = !isCollapsed;
             toc.classList.toggle('hidden', isCollapsed);

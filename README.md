@@ -9,7 +9,7 @@ It ships with two sides:
 
 ## Requirements
 
-- PHP >= 8.3 with the `pdo_sqlite` extension (the app uses SQLite by default)
+- PHP >= 8.5 with the `pdo_sqlite` extension (the app uses SQLite by default)
 - [Composer](https://getcomposer.org)
 - Node.js >= 18 and npm
 
@@ -22,13 +22,13 @@ It ships with two sides:
 
 2. Create your environment file and app key
    ```bash
-   cp .env.example .env
+   cp env.toml.example env.toml
    php pool key:generate
    ```
 
 3. Create the SQLite database and run migrations
    ```bash
-   touch database/database.sqlite
+   touch schema/database.sqlite
    php pool migrate
    ```
 

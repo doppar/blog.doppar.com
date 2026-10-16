@@ -6,8 +6,8 @@
         </a>
 
         <nav class="dp-nav" aria-label="Main">
-            <a href="/">Stories</a>
-            <a href="/?tab=featured">Featured</a>
+            <a href="https://tour.doppar.com" target="_blank" rel="noopener">Tour<span class="dp-ext">↗</span></a>
+            <a href="https://ai.doppar.com" target="_blank" rel="noopener">AI<span class="dp-ext">↗</span></a>
             <a href="https://doppar.com" target="_blank" rel="noopener">Docs<span class="dp-ext">↗</span></a>
             <a href="https://marketplace.visualstudio.com/items?itemName=Doppar.doppar-snippets" target="_blank" rel="noopener">Extensions<span class="dp-ext">↗</span></a>
             <a href="https://github.com/doppar/framework" target="_blank" rel="noopener">GitHub<span class="dp-ext">↗</span></a>
@@ -114,8 +114,8 @@
     <!-- Mobile menu -->
     <div id="mobile-menu" class="dp-mobile hidden">
         <div class="dp-wrap">
-            <a href="/">All stories</a>
-            <a href="/?tab=featured">Featured</a>
+            <a href="https://tour.doppar.com" target="_blank" rel="noopener">Tour</a>
+            <a href="https://ai.doppar.com" target="_blank" rel="noopener">AI</a>
             <a href="https://doppar.com">Documentation</a>
             <a href="https://github.com/doppar/framework">GitHub</a>
             #if (auth()->check())

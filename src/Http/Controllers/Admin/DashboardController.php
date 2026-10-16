@@ -5,9 +5,9 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Support\AdminDashboardCache;
 use Phaseolies\Http\Response;
-use Phaseolies\Utilities\Attributes\Mapper;
-use Phaseolies\Utilities\Attributes\Middleware;
-use Phaseolies\Utilities\Attributes\Route;
+use Phaseolies\Support\Router\Attributes\Mapper;
+use Phaseolies\Middleware\Attributes\Middleware;
+use Phaseolies\Support\Router\Attributes\Route;
 
 #[Mapper(prefix: 'admin')]
 #[Middleware(['auth', 'admin'])]

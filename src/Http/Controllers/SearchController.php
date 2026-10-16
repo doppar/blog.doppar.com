@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Post;
 use Phaseolies\Http\Request;
 use Phaseolies\Http\Response;
-use Phaseolies\Utilities\Attributes\Route;
+use Phaseolies\Support\Router\Attributes\Route;
 
 class SearchController extends Controller
 {

@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use Phaseolies\Utilities\Attributes\Route;
-use Phaseolies\Utilities\Attributes\Model as RouteModel;
+use Phaseolies\Support\Router\Attributes\Route;
+use Phaseolies\Database\Entity\Attributes\Model as RouteModel;
 use App\Models\Comment;
 use App\Models\CommentLike;
 use Phaseolies\Support\Facades\Auth;

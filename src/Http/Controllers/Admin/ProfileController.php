@@ -16,9 +16,9 @@ use Phaseolies\Support\Facades\Crypt;
 use Phaseolies\Support\Facades\Hash;
 use Phaseolies\Support\Facades\Storage;
 use Phaseolies\Support\File;
-use Phaseolies\Utilities\Attributes\Mapper;
-use Phaseolies\Utilities\Attributes\Middleware;
-use Phaseolies\Utilities\Attributes\Route;
+use Phaseolies\Support\Router\Attributes\Mapper;
+use Phaseolies\Middleware\Attributes\Middleware;
+use Phaseolies\Support\Router\Attributes\Route;
 use Symfony\Component\Clock\NativeClock;
 
 #[Mapper(prefix: 'admin/profile')]

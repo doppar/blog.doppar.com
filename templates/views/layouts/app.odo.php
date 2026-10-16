@@ -19,7 +19,7 @@
                 csrfToken: "[[ csrf_token() ]]"
             };
         </script>
-        #vite('resources/client/js/app.js')
+        #vite('templates/client/js/app.js')
     </head>
     <body class="#yield('body_class')">
         #if (session('success') || session('error') || session()->has('errors'))

@@ -7,8 +7,8 @@ use App\Http\Requests\Auth\RegisterRequest;
 use App\Models\User;
 use Phaseolies\Http\Response;
 use Phaseolies\Support\Facades\Auth;
-use Phaseolies\Utilities\Attributes\Mapper;
-use Phaseolies\Utilities\Attributes\Route;
+use Phaseolies\Support\Router\Attributes\Mapper;
+use Phaseolies\Support\Router\Attributes\Route;
 
 #[Mapper(prefix: 'register', middleware: ['guest'])]
 class RegisterController extends Controller

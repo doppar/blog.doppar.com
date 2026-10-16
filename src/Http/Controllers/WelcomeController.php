@@ -8,8 +8,8 @@ use App\Models\Post;
 use App\Models\Tag;
 use Phaseolies\Support\Facades\DB;
 use Phaseolies\Http\Request;
-use Phaseolies\Utilities\Attributes\Route;
-use Phaseolies\Utilities\Attributes\Model as RouteModel;
+use Phaseolies\Support\Router\Attributes\Route;
+use Phaseolies\Database\Entity\Attributes\Model as RouteModel;
 
 class WelcomeController extends Controller
 {

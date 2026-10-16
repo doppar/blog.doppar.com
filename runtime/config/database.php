@@ -7,7 +7,7 @@
 |
 | This configuration file defines the database connection settings for the
 | application. It supports database connections MySQL, SQLite and PostgreSQL. Database credentials and settings are primarily
-| loaded from the ".env" file to maintain security and flexibility.
+| loaded from the "env.toml" file to maintain security and flexibility.
 |
 | Supported Drivers: mysql, sqlite, pgsql
 |
@@ -21,7 +21,7 @@ return [
         'sqlite' => [
             'driver' => 'sqlite',
             'url' => env('DATABASE_URL'),
-            'database' => env('DB_DATABASE', database_path('database.sqlite')),
+            'database' => env('DB_DATABASE', schema_path('database.sqlite')),
             'prefix' => '',
             'foreign_key_constraints' => env('DB_FOREIGN_KEYS', true),
         ],
@@ -38,23 +38,9 @@ return [
             'prefix' => env('DB_PREFIX', ''),
             'strict' => env('DB_STRICT_MODE', true),
             'engine' => env('DB_ENGINE', null),
-            'options' => extension_loaded('pdo_mysql') ? (function () {
-                $sslCa = env('MYSQL_ATTR_SSL_CA');
-
-                if (!$sslCa) {
-                    return [];
-                }
-
-                if (defined('Pdo\Mysql::ATTR_SSL_CA')) {
-                    return [
-                        \Pdo\Mysql::ATTR_SSL_CA => $sslCa,
-                    ];
-                }
-
-                return [
-                    \PDO::MYSQL_ATTR_SSL_CA => $sslCa,
-                ];
-            })() : [],
+            'options' => extension_loaded('pdo_mysql') ? array_filter([
+                \Pdo\Mysql::ATTR_SSL_CA => env('MYSQL_ATTR_SSL_CA'),
+            ]) : [],
         ],
 
         'pgsql' => [

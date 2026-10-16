@@ -3,9 +3,9 @@
 namespace App\Models;
 
 use Phaseolies\Database\Entity\Attributes\Hook;
-use Phaseolies\Database\Entity\Model;
+use Phaseolies\Auth\Authable;
 
-class User extends Model
+class User extends Authable
 {
     public const ROLE_ADMIN = 'admin';
     public const ROLE_EDITOR = 'editor';

@@ -3,8 +3,9 @@
 namespace App\Http;
 
 use Phaseolies\Middleware\Middleware;
+use Phaseolies\Http\Contracts\GatewayInterface;
 
-class Kernel extends Middleware
+class Gateway extends Middleware implements GatewayInterface
 {
     /**
      * The application's global HTTP middleware stack.
@@ -22,7 +23,7 @@ class Kernel extends Middleware
      *
      * @var array<string, array<int, class-string|string>>
      */
-    public $middlewareGroups = [
+    public array $middlewareGroups = [
         'web' => [
             \Phaseolies\Middleware\CsrfTokenMiddleware::class,
         ],
@@ -49,4 +50,34 @@ class Kernel extends Middleware
             // 'throttle' => \Phaseolies\Middleware\ThrottleRequests::class,
         ]
     ];
+
+    /**
+     * Get the application's global HTTP middleware stack.
+     *
+     * @return array
+     */
+    public function getGlobalMiddleware(): array
+    {
+        return $this->middleware;
+    }
+
+    /**
+     * Get the application's route middleware groups.
+     *
+     * @return array<string, array<int, class-string|string>>
+     */
+    public function getMiddlewareGroups(): array
+    {
+        return $this->middlewareGroups;
+    }
+
+    /**
+     * Get the application's named route middleware aliases.
+     *
+     * @return array<string, array<string, class-string|string>>
+     */
+    public function getRouteMiddleware(): array
+    {
+        return $this->routeMiddleware;
+    }
 }

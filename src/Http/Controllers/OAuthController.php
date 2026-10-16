@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use Phaseolies\Utilities\Attributes\Route;
+use Phaseolies\Support\Router\Attributes\Route;
 use Doppar\OAuthic\OAuthic;
 use App\Models\User;
 use Phaseolies\Http\Request;

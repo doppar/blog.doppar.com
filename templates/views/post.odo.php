@@ -348,10 +348,10 @@
             <div>
                 <h4 class="text-primary font-semibold mb-2">Links</h4>
                 <ul class="space-y-1.5 text-ink-soft">
-                    <li><a href="https://doppar.com/versions/3.x/credits" target="_blank" rel="noopener noreferrer" class="hover:text-ink transition-colors">Credits</a></li>
-                    <li><a href="https://doppar.com/versions/3.x/getting-started" target="_blank" rel="noopener noreferrer" class="hover:text-ink transition-colors">Getting started</a></li>
-                    <li><a href="https://doppar.com/versions/3.x/releases" target="_blank" rel="noopener noreferrer" class="hover:text-ink transition-colors">Release notes</a></li>
-                    <li><a href="https://doppar.com/versions/3.x/contributions" target="_blank" rel="noopener noreferrer" class="hover:text-ink transition-colors">Contributions</a></li>
+                    <li><a href="https://doppar.com/versions/4.x/credits" target="_blank" rel="noopener noreferrer" class="hover:text-ink transition-colors">Credits</a></li>
+                    <li><a href="https://doppar.com/versions/4.x/installation" target="_blank" rel="noopener noreferrer" class="hover:text-ink transition-colors">Getting started</a></li>
+                    <li><a href="https://doppar.com/versions/4.x/releases" target="_blank" rel="noopener noreferrer" class="hover:text-ink transition-colors">Release notes</a></li>
+                    <li><a href="https://doppar.com/versions/4.x/contributions" target="_blank" rel="noopener noreferrer" class="hover:text-ink transition-colors">Contributions</a></li>
                 </ul>
             </div>
 
@@ -366,18 +366,18 @@
             <div>
                 <h4 class="text-primary font-semibold mb-2">Ecosystem</h4>
                 <ul class="space-y-1.5 text-ink-soft">
-                    <li><a href="https://doppar.com/versions/3.x/doppar-ai" target="_blank" rel="noopener noreferrer" class="hover:text-ink transition-colors">AI</a></li>
-                    <li><a href="https://doppar.com/versions/3.x/doppar-queue" target="_blank" rel="noopener noreferrer" class="hover:text-ink transition-colors">Queue</a></li>
-                    <li><a href="https://doppar.com/versions/3.x/doppar-airbend" target="_blank" rel="noopener noreferrer" class="hover:text-ink transition-colors">Airbend</a></li>
-                    <li><a href="https://doppar.com/versions/3.x/doppar-flarion" target="_blank" rel="noopener noreferrer" class="hover:text-ink transition-colors">Flarion</a></li>
-                    <li><a href="https://doppar.com/versions/3.x/doppar-notifier" target="_blank" rel="noopener noreferrer" class="hover:text-ink transition-colors">Notifier</a></li>
-                    <li><a href="https://doppar.com/versions/3.x/doppar-orion" target="_blank" rel="noopener noreferrer" class="hover:text-ink transition-colors">Orion</a></li>
-                    <li><a href="https://doppar.com/versions/3.x/doppar-guard" target="_blank" rel="noopener noreferrer" class="hover:text-ink transition-colors">Guard</a></li>
-                    <li><a href="https://doppar.com/versions/3.x/doppar-axios" target="_blank" rel="noopener noreferrer" class="hover:text-ink transition-colors">Axios</a></li>
-                    <li><a href="https://doppar.com/versions/3.x/doppar-oauthic" target="_blank" rel="noopener noreferrer" class="hover:text-ink transition-colors">OAuthic</a></li>
-                    <li><a href="https://doppar.com/versions/3.x/doppar-bloom" target="_blank" rel="noopener noreferrer" class="hover:text-ink transition-colors">Bloom</a></li>
-                    <li><a href="https://doppar.com/versions/3.x/doppar-insight" target="_blank" rel="noopener noreferrer" class="hover:text-ink transition-colors">Insight</a></li>
-                    <li><a href="https://doppar.com/versions/3.x/doppar-twig-bridge" target="_blank" rel="noopener noreferrer" class="hover:text-ink transition-colors">Twig Bridge</a></li>
+                    <li><a href="https://doppar.com/versions/4.x/doppar-ai" target="_blank" rel="noopener noreferrer" class="hover:text-ink transition-colors">AI</a></li>
+                    <li><a href="https://doppar.com/versions/4.x/doppar-queue" target="_blank" rel="noopener noreferrer" class="hover:text-ink transition-colors">Queue</a></li>
+                    <li><a href="https://doppar.com/versions/4.x/doppar-airbend" target="_blank" rel="noopener noreferrer" class="hover:text-ink transition-colors">Airbend</a></li>
+                    <li><a href="https://doppar.com/versions/4.x/doppar-flarion" target="_blank" rel="noopener noreferrer" class="hover:text-ink transition-colors">Flarion</a></li>
+                    <li><a href="https://doppar.com/versions/4.x/doppar-notifier" target="_blank" rel="noopener noreferrer" class="hover:text-ink transition-colors">Notifier</a></li>
+                    <li><a href="https://doppar.com/versions/4.x/doppar-orion" target="_blank" rel="noopener noreferrer" class="hover:text-ink transition-colors">Orion</a></li>
+                    <li><a href="https://doppar.com/versions/4.x/doppar-guard" target="_blank" rel="noopener noreferrer" class="hover:text-ink transition-colors">Guard</a></li>
+                    <li><a href="https://doppar.com/versions/4.x/doppar-axios" target="_blank" rel="noopener noreferrer" class="hover:text-ink transition-colors">Axios</a></li>
+                    <li><a href="https://doppar.com/versions/4.x/doppar-oauthic" target="_blank" rel="noopener noreferrer" class="hover:text-ink transition-colors">OAuthic</a></li>
+                    <li><a href="https://doppar.com/versions/4.x/doppar-bloom" target="_blank" rel="noopener noreferrer" class="hover:text-ink transition-colors">Bloom</a></li>
+                    <li><a href="https://doppar.com/versions/4.x/doppar-insight" target="_blank" rel="noopener noreferrer" class="hover:text-ink transition-colors">Insight</a></li>
+                    <li><a href="https://doppar.com/versions/4.x/doppar-twig-bridge" target="_blank" rel="noopener noreferrer" class="hover:text-ink transition-colors">Twig Bridge</a></li>
                 </ul>
             </div>
 

@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Concerns\BuildsPostFeed;
-use Phaseolies\Utilities\Attributes\Route;
-use Phaseolies\Utilities\Attributes\Model as RouteModel;
+use Phaseolies\Support\Router\Attributes\Route;
+use Phaseolies\Database\Entity\Attributes\Model as RouteModel;
 use App\Models\SavedPost;
 use App\Models\Post;
 use Phaseolies\Http\Request;

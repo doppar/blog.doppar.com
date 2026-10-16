@@ -8,10 +8,10 @@ use App\Http\Requests\Admin\UpdateTagRequest;
 use App\Models\Tag;
 use Phaseolies\Http\Request;
 use Phaseolies\Http\Response;
-use Phaseolies\Utilities\Attributes\Mapper;
-use Phaseolies\Utilities\Attributes\Middleware;
-use Phaseolies\Utilities\Attributes\Model as RouteModel;
-use Phaseolies\Utilities\Attributes\Route;
+use Phaseolies\Support\Router\Attributes\Mapper;
+use Phaseolies\Middleware\Attributes\Middleware;
+use Phaseolies\Database\Entity\Attributes\Model as RouteModel;
+use Phaseolies\Support\Router\Attributes\Route;
 
 #[Middleware(['auth', 'admin'])]
 #[Mapper(prefix: 'admin/tags')]

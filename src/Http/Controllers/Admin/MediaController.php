@@ -8,11 +8,11 @@ use App\Support\AdminMediaLibraryCache;
 use Phaseolies\Http\Request;
 use Phaseolies\Http\Response;
 use Phaseolies\Support\File;
-use Phaseolies\Utilities\Attributes\Mapper;
-use Phaseolies\Utilities\Attributes\Middleware;
-use Phaseolies\Utilities\Attributes\Model as RouteModel;
-use Phaseolies\Utilities\Attributes\Route;
-use Phaseolies\Utilities\Attributes\Transaction;
+use Phaseolies\Support\Router\Attributes\Mapper;
+use Phaseolies\Middleware\Attributes\Middleware;
+use Phaseolies\Database\Entity\Attributes\Model as RouteModel;
+use Phaseolies\Support\Router\Attributes\Route;
+use Phaseolies\Database\Attributes\Transaction;
 
 #[Mapper(prefix: 'admin/media')]
 #[Middleware(['auth', 'admin'])]

@@ -9,7 +9,7 @@
         <link rel="icon" type="image/png" sizes="16x16" href="[[ url('/favicon-16x16.png') ]]">
         <link rel="icon" type="image/png" sizes="32x32" href="[[ url('/favicon-32x32.png') ]]">
         <link rel="apple-touch-icon" sizes="180x180" href="[[ url('/apple-touch-icon.png') ]]">
-        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,200..800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
         #yield('head')
         <script>
             window.__DOPPAR_FRONTEND__ = {
@@ -21,7 +21,7 @@
         </script>
         #vite('templates/client/js/app.js')
     </head>
-    <body class="#yield('body_class')">
+    <body class="#yield('body_class') dp-auth">
         #if (session('success') || session('error') || session()->has('errors'))
             <div class="app-feedback-stack">
                 #if (session('success'))

@@ -1,0 +1,164 @@
+<header id="site-header" class="dp-head">
+    <div class="dp-wrap dp-head__in">
+        <a href="/" class="dp-brand" aria-label="Doppar News home">
+            <img src="/logo-icon.png" alt="" class="dp-brand__mark">
+            <span class="dp-brand__name">Doppar<span class="dp-brand__tag">NEWS</span></span>
+        </a>
+
+        <nav class="dp-nav" aria-label="Main">
+            <a href="https://tour.doppar.com" target="_blank" rel="noopener">Tour<span class="dp-ext">↗</span></a>
+            <a href="https://ai.doppar.com" target="_blank" rel="noopener">AI<span class="dp-ext">↗</span></a>
+            <a href="https://doppar.com" target="_blank" rel="noopener">Docs<span class="dp-ext">↗</span></a>
+            <a href="https://marketplace.visualstudio.com/items?itemName=Doppar.doppar-snippets" target="_blank" rel="noopener">Extensions<span class="dp-ext">↗</span></a>
+            <a href="https://github.com/doppar/framework" target="_blank" rel="noopener">GitHub<span class="dp-ext">↗</span></a>
+        </nav>
+
+        <!-- Search: #search-input / #search-results are driven by search.js -->
+        <div class="dp-search">
+            <svg class="dp-search__icon" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24" aria-hidden="true">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+            </svg>
+            <input type="text" id="search-input" placeholder="Search stories" autocomplete="off" aria-label="Search stories">
+            <kbd aria-hidden="true">/</kbd>
+            <div id="search-results" class="dp-search__results hidden"></div>
+        </div>
+
+        <div class="dp-actions">
+            #if (auth()->check())
+            <div class="flex items-center">
+                <div class="admin-dropdown" data-dropdown>
+                    <button class="admin-profile" type="button" data-dropdown-trigger aria-expanded="false">
+                        <span class="admin-profile__avatar">
+                            #if ((auth()->user()->image ?? '') !== '')
+                                <img src="[[ auth()->user()->image ]]" alt="[[ auth()->user()->name ]]">
+                            #else
+                                [[ strtoupper(substr((string) auth()->user()->name, 0, 2)) ]]
+                            #endif
+                        </span>
+                        <span class="admin-profile__name">[[ auth()->user()->name ]]</span>
+                        <svg class="admin-profile__chevron" viewBox="0 0 20 20" aria-hidden="true">
+                            <path d="M5 7.5 10 12.5l5-5"></path>
+                        </svg>
+                    </button>
+
+                    <div class="admin-dropdown__menu admin-dropdown__menu--profile" data-dropdown-menu>
+                        <div class="admin-dropdown__head admin-dropdown__head--profile">
+                            <span class="admin-dropdown__head-avatar">
+                                #if ((auth()->user()->image ?? '') !== '')
+                                    <img src="[[ auth()->user()->image ]]" alt="[[ auth()->user()->name ]]">
+                                #else
+                                    [[ strtoupper(substr((string) auth()->user()->name, 0, 2)) ]]
+                                #endif
+                            </span>
+                            <span class="admin-dropdown__head-text">
+                                <strong>[[ auth()->user()->name ]]</strong>
+                                <span>[[ auth()->user()->email ]]</span>
+                            </span>
+                        </div>
+
+                        <div class="admin-dropdown__divider"></div>
+
+                        <a class="admin-dropdown__row" href="[[ route('saved.index') ]]">
+                            <svg viewBox="0 0 24 24" aria-hidden="true">
+                                <path d="M17.593 3.322c1.1.128 1.907 1.077 1.907 2.185V21L12 17.25 4.5 21V5.507c0-1.108.806-2.057 1.907-2.185a48.507 48.507 0 0111.186 0z"></path>
+                            </svg>
+                            <span>Saved posts</span>
+                        </a>
+
+                        <div class="admin-dropdown__divider"></div>
+
+                        #if (auth()->user()->role === \App\Models\User::ROLE_ADMIN)
+                        <a class="admin-dropdown__row" href="[[ route('admin.profile.index') ]]">
+                            <svg viewBox="0 0 24 24" aria-hidden="true">
+                                <circle cx="12" cy="12" r="3"></circle>
+                                <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 1 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 1 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.6a1.65 1.65 0 0 0 1-1.51V3a2 2 0 1 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 1 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+                            </svg>
+                            <span>Account settings</span>
+                        </a>
+
+                        <div class="admin-dropdown__divider"></div>
+                        #endif
+
+                        <button class="admin-dropdown__row admin-dropdown__row--danger" type="submit" form="site-logout-form">
+                            <svg viewBox="0 0 24 24" aria-hidden="true">
+                                <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+                                <path d="M16 17l5-5-5-5"></path>
+                                <path d="M21 12H9"></path>
+                            </svg>
+                            <span>Log out</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            #else
+            <a href="[[ route('login') . '?redirect_to=' . urlencode(request()->getPath()) ]]" class="dp-link">Sign in</a>
+            <a href="https://doppar.com" class="dp-btn dp-btn--volt">
+                Get started
+                <svg fill="none" stroke="currentColor" stroke-width="2.4" viewBox="0 0 24 24" aria-hidden="true">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
+                </svg>
+            </a>
+            #endif
+        </div>
+
+        <button type="button" id="mobile-menu-btn" class="dp-burger" aria-label="Menu" aria-expanded="false" aria-controls="mobile-menu">
+            <svg id="menu-icon-open" class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2.4" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5M3.75 17.25h16.5" />
+            </svg>
+            <svg id="menu-icon-close" class="w-5 h-5 hidden" fill="none" stroke="currentColor" stroke-width="2.4" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+        </button>
+    </div>
+
+    <!-- Mobile menu -->
+    <div id="mobile-menu" class="dp-mobile hidden">
+        <div class="dp-wrap">
+            <a href="https://tour.doppar.com" target="_blank" rel="noopener">Tour</a>
+            <a href="https://ai.doppar.com" target="_blank" rel="noopener">AI</a>
+            <a href="https://doppar.com">Documentation</a>
+            <a href="https://github.com/doppar/framework">GitHub</a>
+            #if (auth()->check())
+            <a href="[[ route('saved.index') ]]">Saved posts</a>
+            <button type="submit" form="site-logout-form">Log out</button>
+            #else
+            <a href="[[ route('login') . '?redirect_to=' . urlencode(request()->getPath()) ]]">Sign in</a>
+            #endif
+        </div>
+    </div>
+
+    #if (auth()->check())
+    <form id="site-logout-form" method="POST" action="[[ route('logout') ]]" class="hidden">
+        #csrf
+    </form>
+    #endif
+</header>
+
+<script>
+    // Mobile nav menu
+    (() => {
+        const btn = document.getElementById('mobile-menu-btn');
+        const menu = document.getElementById('mobile-menu');
+        const iconOpen = document.getElementById('menu-icon-open');
+        const iconClose = document.getElementById('menu-icon-close');
+        if (!btn || !menu) return;
+        btn.addEventListener('click', () => {
+            const willOpen = menu.classList.contains('hidden');
+            menu.classList.toggle('hidden', !willOpen);
+            iconOpen.classList.toggle('hidden', willOpen);
+            iconClose.classList.toggle('hidden', !willOpen);
+            btn.setAttribute('aria-expanded', String(willOpen));
+        });
+    })();
+
+    // "/" focuses the search box (unless you are already typing somewhere)
+    document.addEventListener('keydown', (e) => {
+        if (e.key !== '/' || e.metaKey || e.ctrlKey || e.altKey) return;
+        const el = document.activeElement;
+        if (el && (/^(INPUT|TEXTAREA|SELECT)$/.test(el.tagName) || el.isContentEditable)) return;
+        const input = document.getElementById('search-input');
+        if (!input || input.offsetParent === null) return;
+        e.preventDefault();
+        input.focus();
+    });
+</script>

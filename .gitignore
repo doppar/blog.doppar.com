@@ -2,7 +2,7 @@
 /vendor
 /.idea
 /.vscode
-.env
+env.toml
 /.phpunit.cache
 /vendor
 /package
@@ -13,5 +13,6 @@ composer.phar
 phpunit.xml.dist
 .idea
 /node_modules
-database/database.sqlite
+schema/database.sqlite
 public/build
+.env

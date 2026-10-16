@@ -46,8 +46,8 @@ export default defineConfig({
     publicDir: false,
     resolve: {
         alias: {
-            '~client': path.resolve(__dirname, 'resources/client'),
-            '@': path.resolve(__dirname, 'resources/client/js'),
+            '~client': path.resolve(__dirname, 'templates/client'),
+            '@': path.resolve(__dirname, 'templates/client/js'),
         },
     },
     server: {
@@ -61,7 +61,7 @@ export default defineConfig({
         emptyOutDir: true,
         manifest: 'manifest.json',
         rollupOptions: {
-            input: ['resources/client/js/app.js'],
+            input: ['templates/client/js/app.js'],
         },
     },
 });

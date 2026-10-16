@@ -13,5 +13,5 @@ composer.phar
 phpunit.xml.dist
 .idea
 /node_modules
-database/database.sqlite
+schema/database.sqlite
 public/build

@@ -174,7 +174,7 @@
                 <div>
                     <h4 class="text-primary font-semibold mb-2">Get Involved</h4>
                     <ul class="space-y-1.5 text-ink-soft">
-                        <li><a href="https://join.slack.com/t/zuno-global/shared_invite/zt-3xg3sl8vq-giLmT9rxCdDzQ7yEK53NvA" target="_blank" rel="noopener noreferrer" class="hover:text-ink transition-colors">Join community</a></li>
+                        <li><a href="https://discord.gg/Hz3tq294J" target="_blank" rel="noopener noreferrer" class="hover:text-ink transition-colors">Join community</a></li>
                         <li><a href="https://github.com/doppar/framework/issues" target="_blank" rel="noopener noreferrer" class="hover:text-ink transition-colors">Request features</a></li>
                     </ul>
                 </div>

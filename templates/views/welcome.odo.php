@@ -100,7 +100,7 @@ $arrowSvg = '<svg fill="none" stroke="currentColor" stroke-width="2.4" viewBox="
                         <p>Ask questions and share what you are building.</p>
                     </div>
                     <div class="dp-tile__links">
-                        <a href="https://discord.gg/Hz3tq294J" target="_blank" rel="noopener noreferrer">Join our Discord →</a>
+                        <a href="https://discord.gg/n7Duy6uwP" target="_blank" rel="noopener noreferrer">Join our Discord →</a>
                         <a href="https://github.com/doppar/framework/issues" target="_blank" rel="noopener noreferrer">Request a feature →</a>
                     </div>
                 </aside>
